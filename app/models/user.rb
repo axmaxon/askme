@@ -7,8 +7,10 @@ class User < ApplicationRecord
 
   has_many :questions, :dependent => :destroy
 
-  validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
+  validates :email, :username, presence: true, uniqueness: true
+  validates :email, format: { with: /\A[^@\s]+@[^@\s]+\.[^@\s]+\Z/}
+  validates :username, length: { maximum: 40}, format: { with: /\A[\w]+\Z/}
+
 
   # Добавляем виртуальный атрибут -пароль. Это поле будет в руби-объекте но не в БД
   attr_accessor :password
