@@ -24,6 +24,11 @@ class User < ApplicationRecord
   # (те что будут храниться в полях password_hash password_salt)
   before_save :encrypt_password
 
+  # !Изменяет @username приводя к нижнему регистру перед валидацией.(Для искл. дублей)
+  before_validation do
+    self.username&.downcase!
+  end
+
   # Служебный метод, преобразующий бинарную строку в 16-ричный формат, для удобства хранения
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
