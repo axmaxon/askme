@@ -1,26 +1,24 @@
 require 'openssl'
 class User < ApplicationRecord
-
   # Параметры работы модуля шифрования паролей
+  EMAIL_PATTERN = /\A[^@\s]+@[^@\s]+\.[^@\s]+\Z/
+  USERNAME_PATTERN = /\A[\w]+\Z/
   ITERATIONS = 20000
   DIGEST = OpenSSL::Digest::SHA256.new
 
-  has_many :questions, :dependent => :destroy
+  has_many :questions, dependent: :destroy
 
   validates :email, :username, presence: true, uniqueness: true
-  validates :email, format: { with: /\A[^@\s]+@[^@\s]+\.[^@\s]+\Z/}
-  validates :username, length: { maximum: 40}, format: { with: /\A[\w]+\Z/}
-
+  validates :email, format: { with: EMAIL_PATTERN }
+  validates :username, length: { maximum: 40 }, format: { with: USERNAME_PATTERN }
 
   # Добавляем виртуальный атрибут -пароль. Это поле будет в руби-объекте но не в БД
   attr_accessor :password
 
   # Валидируем атрибут пароль. Т.е rails перед сохранением проверят и это поле.
   # Валидация будет происходить только при создании нового поль-ля (при выз. экшн create)
-  validates_presence_of :password, on: :create
-
   # В объекте должно быть второе поле password_confirmation (для подтверждения пароля)
-  validates_confirmation_of :password
+  validates :password, presence: true, confirmation: true, on: :create
 
   # Коллбэк чтобы зашифровать наши пароли ДО сохранения очередного пользователя в базу.
   # (те что будут храниться в полях password_hash password_salt)
