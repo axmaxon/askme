@@ -1,7 +1,6 @@
 <h1><%=@user.name %></h1>
 <div>
-  <img src ='<%= @user.avatar_url %>' alt="[фото]">
-  <%= image_tag @user.avatar_url, alt: "[фото]" %>
+  <%= image_tag user_avatar(@user), alt: "[фото]" %>
 </div>
 
 <h2><%= @user.username%></h2>
