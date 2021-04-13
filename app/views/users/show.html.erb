@@ -1,6 +1,9 @@
 <h1><%=@user.name %></h1>
 <div>
-  <img src ='<%= @user.avatar_url %>' alt="ava">
+  <img src ='<%= @user.avatar_url %>' alt="[фото]">
+  <%= image_tag @user.avatar_url, alt: "[фото]" %>
 </div>
 
 <h2><%= @user.username%></h2>
+
+<a href="#" class="button button-green">Задать вопрос</a>
