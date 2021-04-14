@@ -1,6 +1,15 @@
 @import "reset";
+
+// Подключаем стили для всех страниц
 @import "text";
-@import "users";
 @import "grid";
-@import "form";
 @import "button";
+@import "form";
+
+// Подключаем стили, специфичные для конкретных view-файлов
+@import "layout";
+@import "users";
+@import "questions";
+
+
+
