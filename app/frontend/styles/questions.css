@@ -41,3 +41,17 @@
 .question-actions a {
   margin-left: 10px;
 }
+
+.question-how-many {
+  color: #005a55;
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+}
+
+.question-how-many__item {
+  display: inline-block;
+  background: white;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}

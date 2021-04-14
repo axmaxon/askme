@@ -63,5 +63,12 @@
         <%= render partial: 'questions/question', object: question %>
       <% end %>
     </div>
+
+      <%# Блок c количеством вопросов %>
+      <div class="question-how-many" >
+        <div class="question-how-many__item">
+          <%= "Всего #{@questions.length} #{inclination(@questions.length)}" %>
+        </div>
+      </div>
   </div>
 </div>
