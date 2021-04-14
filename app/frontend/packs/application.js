@@ -4,7 +4,6 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "../styles/application.scss"
@@ -12,5 +11,14 @@ import "../styles/application.scss"
 const images = require.context('../images/', true)
 
 Rails.start()
-// Turbolinks.start()
 ActiveStorage.start()
+
+// Этот код добавляет обработчик события выдвигания формы при клике на кнопку
+// «Задать вопрос», которая видна только, когда страница открыта в маленьком
+// окне.
+$(function(){
+    $('#ask-button').click(function(){
+        $('#ask-form').slideToggle(300);
+        return false;
+    });
+});
