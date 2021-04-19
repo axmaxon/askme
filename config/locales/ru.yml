@@ -1,0 +1,19 @@
+ru:
+  question:
+    zero: 'вопросов нет'
+    one: 'Всего %{count} вопрос:'
+    few: 'Всего %{count} вопроса:'
+    many: 'Всего %{count} вопросов:'
+    other: '%{count} вопросы'
+  answer:
+    zero: 'ответов - %{count}'
+    one: 'ответ - %{count}'
+    few: 'ответа - %{count}'
+    many: 'ответов - %{count}'
+    other: 'ответы - %{count}'
+  unanswered:
+    zero: 'неотвеченных - %{count}'
+    one: 'неотвеченный - %{count}'
+    few: 'неотвеченных - %{count}'
+    many: 'неотвеченных - %{count}'
+    other: 'неотвеченные - %{count}'

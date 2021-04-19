@@ -64,10 +64,16 @@
       <% end %>
     </div>
 
-      <%# Блок c количеством вопросов %>
+      <%# Блок c количеством вопросов, ответов и неотвеченных вопросов %>
       <div class="question-how-many" >
         <div class="question-how-many__item">
-          <%= "Всего #{@questions.length} #{inclination(@questions.length)}" %>
+          <%= I18n.t('question', count: @questions_count) %>
+        </div>
+        <div class="question-how-many__item">
+          <%= I18n.t('answer', count: @answers_count ) %>
+        </div>
+        <div class="question-how-many__item">
+          <%= I18n.t('unanswered', count: @unanswered_count) %>
         </div>
       </div>
   </div>
