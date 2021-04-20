@@ -63,8 +63,17 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  # Явно задаем список разрешенных параметров для модели Question. Мы говорим,
+  # что у хэша params должен быть ключ :question. Значением этого ключа может
+  # быть хэш с ключами: :user_id и :text. Другие ключи будут отброшены.
   def question_params
-    params.require(:question).permit(:user_id, :text, :answer)
+    # Защита от уязвимости: если текущий пользователь — адресат вопроса,
+    # он может менять ответы на вопрос, ему доступно также поле :answer.
+    if current_user.present? &&
+      params[:question][:user_id].to_i == current_user.id
+      params.require(:question).permit(:user_id, :text, :answer)
+    else
+      params.require(:question).permit(:user_id, :text)
+    end
   end
 end
