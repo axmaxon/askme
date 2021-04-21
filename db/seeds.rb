@@ -16,7 +16,7 @@ require 'faker'
     name: name,
     username: username,
     email: Faker::Internet.free_email(name: username),
-    password: '12346'
+    password: '12345'
   )
   user.save!
   question = Question.new(
@@ -24,4 +24,4 @@ require 'faker'
     text: "Do you #{Faker::Verb.base}?"
   )
   question.save!
-end
+  end
