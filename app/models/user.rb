@@ -1,4 +1,5 @@
 require 'openssl'
+require 'uri'
 
 class User < ApplicationRecord
   # Параметры работы модуля шифрования паролей
@@ -6,6 +7,7 @@ class User < ApplicationRecord
   USERNAME_PATTERN = /\A[\w]+\Z/
   ITERATIONS = 20000
   DIGEST = OpenSSL::Digest::SHA256.new
+  URL_PATTERN = /\A#{URI::regexp(['http', 'https'])}\z/
 
   # Добавляем виртуальный атрибут -пароль. Это поле будет в руби-объекте но не в БД
   attr_accessor :password
@@ -15,6 +17,7 @@ class User < ApplicationRecord
   validates :email, :username, presence: true, uniqueness: true
   validates :email, format: { with: EMAIL_PATTERN }
   validates :username, length: { maximum: 40 }, format: { with: USERNAME_PATTERN }
+  validates :avatar_url, format: { with: URL_PATTERN}
 
   # Валидируем атрибут пароль. Т.е rails перед сохранением проверят и это поле.
   # Валидация будет происходить только при создании нового поль-ля (при выз. экшн create)
