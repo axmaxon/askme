@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :email, :username, presence: true, uniqueness: true
   validates :email, format: { with: EMAIL_PATTERN }
   validates :username, length: { maximum: 40 }, format: { with: USERNAME_PATTERN }
-  validates :avatar_url, format: { with: URL_PATTERN}
+  validates :avatar_url, format: { with: URL_PATTERN }, allow_blank: true
 
   # Валидируем атрибут пароль. Т.е rails перед сохранением проверят и это поле.
   # Валидация будет происходить только при создании нового поль-ля (при выз. экшн create)
