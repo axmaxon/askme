@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   # except - про то каких экшенов не будет в этом ресурсе/контроллере
   # only - какие конкретно будут.
   resources :sessions, only: [:new, :create, :destroy]
-  resources :users, except: [:destroy]
+  resources :users
   resources :questions, except: [:show, :new, :index]
+
 
   get 'show' => 'users#show'
   get 'sign_up' => 'users#new'

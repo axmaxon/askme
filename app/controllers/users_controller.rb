@@ -84,8 +84,14 @@ class UsersController < ApplicationController
     @unanswered_count = @questions_count - @answers_count
   end
 
-  # Действие create будет отзываться при POST-запросе по адресу /users из формы
-  # нового пользователя, которая находится в шаблоне на странице /users/new.
+  def destroy
+    # Сохраняем текущего юзера для редиректа после удаления профиля
+    user = current_user
+    current_user.destroy
+
+    # Отправляем пользователя на главную  с сообщением
+    redirect_to users_path(user), notice: 'Ваш аккаут удалён'
+  end
 
   private
 

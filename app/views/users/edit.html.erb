@@ -63,4 +63,9 @@
       </div>
     <% end %>
   </div>
+    <%# Удаление профиля нажатием на иконку %>
+    <div class="user-del">
+      <%= link_to fa_icon('trash-o'), user_path, method: :delete,
+                  data: { confirm: 'Вы уверены что хотите удалить свой аккаунт?' } %>
+    </div>
 </div>
