@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def new
     # Если пользователь уже авторизован, ему не нужна новая учетная запись,
     # отправляем его на главную с сообщением.
-    redirect_to root_url, alert: 'Вы уже залогинены' if current_user.present?
+    redirect_to users_path, alert: 'Вы уже залогинены' if current_user.present?
 
     # Иначе, создаем болванку нового пользователя.
     @user = User.new
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def create
     # Если пользователь уже авторизован, ему не нужна новая учетная запись,
     # отправляем его на главную с сообщением.
-    redirect_to root_url, alert: 'Вы уже залогинены' if current_user.present?
+    redirect_to users_path, alert: 'Вы уже залогинены' if current_user.present?
 
     # Иначе, создаем нового пользователя с параметрами, которые нам предоставит
     # метод user_params.
@@ -37,7 +37,8 @@ class UsersController < ApplicationController
     if @user.save
         session[:user_id] = @user.id
 
-        redirect_to root_url, notice: 'Вы успешно зарегистрировались'
+        # redirect_to root_url, notice: 'Вы успешно зарегистрировались'
+        redirect_to users_path, notice: 'Вы успешно зарегистрировались'
     else
       # Если не удалось по какой-то причине сохранить пользователя, то рисуем
       # (обратите внимание, это не редирект), страницу new с формой
@@ -85,12 +86,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    # Сохраняем текущего юзера для редиректа после удаления профиля
-    user = current_user
-    current_user.destroy
+    @user.destroy
 
-    # Отправляем пользователя на главную  с сообщением
-    redirect_to users_path(user), notice: 'Ваш аккаут удалён'
+    redirect_to users_path, notice: 'Ваш аккаунт удалён'
   end
 
   private

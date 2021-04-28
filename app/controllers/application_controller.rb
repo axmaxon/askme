@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # нарушении доступа. Мы будем использовать этот метод, когда надо запретить
   # пользователю что-то.
   def reject_user
-    redirect_to root_path, alert: 'Вам сюда нельзя!'
+    redirect_to users_path, alert: 'Вам сюда нельзя!'
   end
 
   # Метод контроллера, достающий текущего юзера из базы по данным аутентификации
