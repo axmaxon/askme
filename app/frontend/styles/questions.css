@@ -29,6 +29,21 @@
 .question-date {
   color: #a0a0a0;
   font-size: 12px;
+  display: inline-block;
+}
+
+.question-author {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.question-author a {
+  color: #a0a0a0;
+  font-size: 12px;
+}
+
+.question-author a:hover {
+  color: #005a55;
 }
 
 .question-actions {
