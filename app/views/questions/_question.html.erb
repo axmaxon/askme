@@ -23,8 +23,9 @@
 
     <%# Ссылка на автора вопроса (если он есть) %>
     <div class="question-author">
-      <% unless question.author.nil? %>
-        <%= link_to "(@#{question.author.username})", user_path(question.author) %>
+      <% author = question.author %>
+      <% if author.present? %>
+        <%= link_to "(@#{author.username})", user_path(author) %>
       <%end %>
     </div>
   </div>
