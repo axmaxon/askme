@@ -34,7 +34,7 @@ module Askme
 
     config.time_zone = 'Moscow'
 
-    # Укажем что по умаолчанию у нас русская локаль
+    # Укажем что по умолчанию у нас русская локаль
     config.i18n.default_locale = :ru
 
     # Don't generate system test files.
