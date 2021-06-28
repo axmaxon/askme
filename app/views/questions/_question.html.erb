@@ -1,18 +1,17 @@
 <%# Это фрагмет (паршал, partial) для вывода вопроса. В нем определена %>
 <%# локальная переменная question, в которую при вызове будет передан %>
 <%# как в метод ruby объект после ключа (object: @question) %>
-
 <div class="question">
   <div class="question-content">
     <%# Текст вопроса %>
     <div class="question-text text-lead">
-      <%= question.text %>
+      <%= render_with_hashtags(question.text) %>
     </div>
 
     <%# Текст ответа, если он есть %>
     <% if question.answer.present? %>
       <div class="question-answer text-lead">
-        <%= question.answer %>
+        <%= render_with_hashtags(question.answer) %>
       </div>
     <% end %>
 

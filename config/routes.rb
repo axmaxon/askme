@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   resources :users
   resources :questions, except: [:show, :new, :index]
 
+  get 'questions/hashtag/:name', to: 'questions#hashtags'
+
 end

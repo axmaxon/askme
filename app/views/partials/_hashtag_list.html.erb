@@ -1,0 +1,10 @@
+<%#Выводит список всех хэштегов %>
+<div class="content-wrapper buffer-both text-center">
+  <div class="buffer-both">
+    <h1 class="title-medium">Хэштеги</h1>
+  </div>
+
+  <% hashtag_list.all.each do |hashtag| %>
+    <%= render_as_hashtags(hashtag.name) %>
+  <% end %>
+</div>

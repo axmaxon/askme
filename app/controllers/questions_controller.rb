@@ -1,9 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :load_question, only: %i[ show edit update destroy ]
-  before_action :authorize_user, except: [:create]
+  before_action :authorize_user, except: %i[hashtags create]
 
   # GET /questions/1/edit
   def edit
+  end
+
+  def hashtags
+    @hashtag = Hashtag.find_by(name: params[:name].downcase)
+    @questions = @hashtag.questions
   end
 
   # Действие create будет отзываться при POST-запросе по адресу /questions из
@@ -50,8 +55,8 @@ class QuestionsController < ApplicationController
 
   private
 
-  # Если загруженный из базы вопрос не пренадлежит и текущему залогиненному
-  # пользователю — посылаем его с помощью описанного в контроллере
+  # Если загруженный из базы вопрос не пренадлежит текущему залогиненному
+  # пользователю — отправляем его на главную, с помощью описанного в контроллере
   # ApplicationController метода reject_user.
   def authorize_user
     reject_user unless @question.user == current_user

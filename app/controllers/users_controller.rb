@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   def index
     # Все пользователи
     @users = User.all
+
+    #  Все хэштеги
+    @hashtag_list= Hashtag.all
   end
 
   def new
