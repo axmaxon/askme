@@ -10,12 +10,21 @@ class Question < ApplicationRecord
 
   after_create do
     question = Question.find_by(id: self.id)
-
     hashtags = self.text.scan(/#[[:word:]]+/)
 
     hashtags.uniq.map do |hashtag|
       tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      question.hashtags << tag
+    end
+  end
 
+  before_update do
+    question = Question.find_by(id: self.id)
+    question.hashtags.clear
+    hashtags = self.text.scan(/#[[:word:]]+/)
+
+    hashtags.uniq.map do |hashtag|
+      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
       question.hashtags << tag
     end
   end
