@@ -30,7 +30,17 @@ class Question < ApplicationRecord
       question.hashtags << tag
     end
 
-    # Подчищаем неиспользуемые теги в базе, если такие есть
+    clean_unrelated_hashtags
+  end
+
+  after_destroy do
+    clean_unrelated_hashtags
+  end
+
+  private
+
+  # Подчищаем неиспользуемые теги в базе, если такие есть
+  def clean_unrelated_hashtags
     Hashtag.all.each do |hashtag|
       hashtag.destroy if hashtag.questions.blank?
     end
