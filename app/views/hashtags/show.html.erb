@@ -1,0 +1,18 @@
+<%# Список всех вопросов для конкретного хэштега %>
+<div class="content-wrapper buffer-both">
+  <div class="buffer-both text-center">
+    <h1 class="title-medium">Вопросы с хэштегом <%= "##{@hashtag.name}" %></h1>
+  </div>
+  <% if @hashtag.questions.blank? %>
+    <h2>Вопросов нет</h2>
+  <% else %>
+    <ul>
+      <% @questions.to_a.each do|question|%>
+        <li class="question-with-hashtags">
+          <span>Вопрос: <%= render_with_hashtags(question.text) %></span><br>
+          <span><%= "Ответ: #{render_with_hashtags(question.answer)}".html_safe if question.answer.present? %></span><br>
+        </li>
+      <%end%>
+    </ul>
+  <% end %>
+</div>

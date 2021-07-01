@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   # если в шаблоне встретишь current_user — не пугайся, что такого метода нет,
   # дерни этот метод у контроллера.
   helper_method :current_user
+  helper_method :get_hashtag_by_name
 
   private
 
@@ -19,5 +20,14 @@ class ApplicationController < ActionController::Base
   # в сессии.
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
+  # Ищет хэштег по имени
+  def get_hashtag_by_name(word)
+    Hashtag.find_by(name: "#{word.delete('#')}")
   end
 end

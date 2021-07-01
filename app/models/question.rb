@@ -21,11 +21,18 @@ class Question < ApplicationRecord
   before_update do
     question = Question.find_by(id: self.id)
     question.hashtags.clear
-    hashtags = self.text.scan(/#[[:word:]]+/)
+
+    # Ищем хэштеги по тексту вопроса и по ответа
+    hashtags = (self.text + self.answer).scan(/#[[:word:]]+/)
 
     hashtags.uniq.map do |hashtag|
       tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
       question.hashtags << tag
+    end
+
+    # Подчищаем неиспользуемые теги в базе, если такие есть
+    Hashtag.all.each do |hashtag|
+      hashtag.destroy if hashtag.questions.blank?
     end
   end
 end

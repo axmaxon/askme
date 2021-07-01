@@ -6,11 +6,6 @@ class QuestionsController < ApplicationController
   def edit
   end
 
-  def hashtags
-    @hashtag = Hashtag.find_by(name: params[:name].downcase)
-    @questions = @hashtag.questions
-  end
-
   # Действие create будет отзываться при POST-запросе по адресу /questions из
   # формы нового вопроса, которая находится в шаблоне на странице
   # /questions/edit

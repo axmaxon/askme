@@ -7,7 +7,5 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :users
   resources :questions, except: [:show, :new, :index]
-
-  get 'questions/hashtag/:name', to: 'questions#hashtags'
-
+  resources :hashtags, only: :show
 end

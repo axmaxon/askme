@@ -9,18 +9,28 @@ module ApplicationHelper
     end
   end
 
-  # Хелпер, рисующий span тэг с иконкой из font-awesome
+  # Рисует span тэг с иконкой из font-awesome
   def fa_icon(icon_class)
     content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
 
-  def render_with_hashtags(text_of_question)
-    text_of_question.gsub(/#[[:word:]]+/) do |word|
-      link_to word, "/questions/hashtag/#{word.delete('#')}"
+  # Рендерит текст вопроса или ответа с хештегами в виде ссылок.
+  def render_with_hashtags(some_text)
+    some_text.gsub(/#[[:word:]]+/) do |word|
+
+      hashtag = get_hashtag_by_name(word)
+
+      if hashtag.blank?
+        link_to word, "#{Rails.root}/public/404.html"
+      else
+        link_to word, hashtag_path(hashtag)
+      end
     end.html_safe
   end
 
-  def render_as_hashtags(name)
-    link_to "##{name}", "/questions/hashtag/#{name}"
+  # Рендерит имя хэштега в виде ссылки с якорем #
+  def render_as_hashtags(hashtag)
+    # link_to "##{name}", "/questions/hashtag/#{name}"
+    link_to "##{hashtag.name}", hashtag_path(hashtag)
   end
 end
