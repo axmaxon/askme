@@ -28,6 +28,6 @@ class ApplicationController < ActionController::Base
 
   # Ищет хэштег по имени
   def get_hashtag_by_name(word)
-    Hashtag.find_by(name: "#{word.delete('#')}")
+    Hashtag.find_by(name: "#{word.delete('#').downcase}")
   end
 end

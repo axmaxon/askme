@@ -70,3 +70,9 @@
   margin-bottom: 10px;
   text-decoration: underline;
 }
+
+.question-with-hashtags {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px #a0a0a0;
+}
