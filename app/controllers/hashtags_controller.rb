@@ -1,6 +1,6 @@
 class HashtagsController < ApplicationController
   def show
-    @hashtag = Hashtag.find_by(id: params[:id]) or not_found
+    @hashtag = Hashtag.find(params[:id])
     @questions = @hashtag.questions
   end
 end

@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :get_hashtag_by_name
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
   private
 
   # Метод, который редиректит посетителя на главную с предупреждением о
@@ -23,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    raise ActionController::RoutingError.new('Not Found')
+    render file: 'public/404.html', status: :not_found, layout: false
   end
 
   # Ищет хэштег по имени
