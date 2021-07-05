@@ -11,8 +11,8 @@ class UsersController < ApplicationController
     # Все пользователи
     @users = User.all
 
-    #  Все хэштеги
-    @hashtag_list= Hashtag.all
+    # Релевантные хэштеги
+    @hashtag_list = Hashtag.relevant
   end
 
   def new

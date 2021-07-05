@@ -30,7 +30,6 @@ module ApplicationHelper
 
   # Рендерит имя хэштега в виде ссылки с якорем #
   def render_as_hashtags(hashtag)
-    # link_to "##{name}", "/questions/hashtag/#{name}"
     link_to "##{hashtag.name}", hashtag_path(hashtag)
   end
 end

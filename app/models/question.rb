@@ -8,41 +8,19 @@ class Question < ApplicationRecord
   # Проверка на наличие атрибута user происходит автоматически, вследствие связи belongs_to
   validates :text, presence: true, length: { maximum: 255 }
 
-  after_create do
-    question = Question.find_by(id: self.id)
-    hashtags = self.text.scan(/#[[:word:]]+/)
-
-    hashtags.uniq.map do |hashtag|
-      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
-      question.hashtags << tag
-    end
-  end
-
-  before_update do
-    question = Question.find_by(id: self.id)
-    question.hashtags.clear
-
-    # Ищем хэштеги по тексту вопроса и по ответа
-    hashtags = (self.text + self.answer).scan(/#[[:word:]]+/)
-
-    hashtags.uniq.map do |hashtag|
-      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
-      question.hashtags << tag
-    end
-
-    clean_unrelated_hashtags
-  end
-
-  after_destroy do
-    clean_unrelated_hashtags
-  end
+  after_commit :do_hashtag, on: [:create, :update]
 
   private
 
-  # Подчищаем неиспользуемые теги в базе, если такие есть
-  def clean_unrelated_hashtags
-    Hashtag.all.each do |hashtag|
-      hashtag.destroy if hashtag.questions.blank?
+  def do_hashtag
+    self.hashtags.clear
+
+    # Ищем хэштеги по тексту вопроса и по ответа
+    hashtags = (self.text + self.answer.to_s).scan(/#[[:word:]]+/)
+
+    hashtags.uniq.map do |hashtag|
+      tag = Hashtag.find_or_create_by(name: hashtag.downcase.delete('#'))
+      self.hashtags << tag
     end
   end
 end
