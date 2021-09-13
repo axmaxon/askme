@@ -1,0 +1,18 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Style/AsciiComments:
+  Enabled: false
