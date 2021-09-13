@@ -24,4 +24,4 @@ require 'faker'
     text: "Do you #{Faker::Verb.base}?"
   )
   question.save!
-  end
+end

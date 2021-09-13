@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   # Чтобы метод current_user был доступен в шаблона, нам необходимо объявить
   # его с помощью метода helper_method. Эта строка как бы говорит рельсам:
   # если в шаблоне встретишь current_user — не пугайся, что такого метода нет,
@@ -30,6 +29,6 @@ class ApplicationController < ActionController::Base
 
   # Ищет хэштег по имени
   def get_hashtag_by_name(word)
-    Hashtag.find_by(name: "#{word.delete('#').downcase}")
+    Hashtag.find_by(name: word.delete('#').downcase.to_s)
   end
 end

@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   # Создадим отдельный метод для повторяющегося кода, который будет выполняться
   # перед каждым экшеном (кроме исключенных (except))
-  before_action :load_user, except: [:index, :create, :new ]
+  before_action :load_user, except: %i[index create new]
 
   # Проверяем, имеет ли юзер доступ к экшену, делаем это для всех действий, кроме
   # :index, :new, :create, :show — к ним есть доступ у всех, даже у анонимных юзеров.
-  before_action :authorize_user, except: [:index, :new, :create, :show]
+  before_action :authorize_user, except: %i[index new create show]
 
   def index
     # Все пользователи
@@ -38,10 +38,10 @@ class UsersController < ApplicationController
     # Пытаемся сохранить пользователя, если удалось - логиним и отправляем пользователя
     # на главную с сообщением что пользователь зарегистрирован
     if @user.save
-        session[:user_id] = @user.id
+      session[:user_id] = @user.id
 
-        # redirect_to root_url, notice: 'Вы успешно зарегистрировались'
-        redirect_to users_path, notice: 'Вы успешно зарегистрировались'
+      # redirect_to root_url, notice: 'Вы успешно зарегистрировались'
+      redirect_to users_path, notice: 'Вы успешно зарегистрировались'
     else
       # Если не удалось по какой-то причине сохранить пользователя, то рисуем
       # (обратите внимание, это не редирект), страницу new с формой
@@ -51,8 +51,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     # Аналогично create, мы получаем параметры нового (обновленного)

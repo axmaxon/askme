@@ -8,13 +8,13 @@ class Question < ApplicationRecord
   # Проверка на наличие атрибута user происходит автоматически, вследствие связи belongs_to
   validates :text, presence: true, length: { maximum: 255 }
 
-  after_commit :create_or_update_hashtags, on: [:create, :update]
+  after_commit :create_or_update_hashtags, on: %i[create update]
 
   private
 
   def create_or_update_hashtags
     # Ищем хэштеги по тексту вопроса и ответа
-    unique_hashtags = ("#{text} #{answer.to_s}").scan(/#[[:word:]]+/).uniq
+    unique_hashtags = ("#{text} #{answer}").scan(/#[[:word:]]+/).uniq
 
     self.hashtags =
       unique_hashtags.map do |unique_hashtag|
