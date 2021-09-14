@@ -55,7 +55,7 @@ $ bundle
 EDITOR='XXXX --wait' bin/rails credentials:edit
 ```
 *где **XXXX** - удобный для вас редактор кода, например `vi` - для открытия
-в vim или `subl` для открытия в Sublime
+в Vim или `subl` для открытия в Sublime
 
 5. Применить миграции:
 
@@ -66,7 +66,7 @@ $ bundle exec rails db:migrate
 6. Запустить сервер:
 
 ```
-$ bundle exec rails db:migrate
+$ bundle exec rails s
 ```
 
 7. В адресной строке веб-браузера указать:
