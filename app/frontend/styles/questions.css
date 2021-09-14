@@ -1,9 +1,11 @@
 .questions-list {
-  padding: 10px 0;
+  border: 1px solid #262732;
 }
 
 .question {
   background: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .question-content {
