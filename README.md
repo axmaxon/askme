@@ -1,24 +1,76 @@
-# README
+Веб-приложение "Askme" 
+===
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Приложение реализующее идею, положенную в основу социальной сети ask.fm 
 
-Things you may want to cover:
+Каждый пользователь может задать вопрос любому участнику системы.
 
-* Ruby version
+В приложении реализованы:
+- регистрация пользователя;
+- возможность задать вопрос зарегистрированным пользователям;
+- добавление хэштегов в текст вопроса и ответа;
+- поиск по хэштегам;
+- редактирование профиля: исправление личных данных, добавление аватара, изменение цвета
+фона в профиле; 
+- получение информации по электронной почте об обновлении событий (комментарии, фотографии,
+подписки);
+- защита от ботов;
 
-* System dependencies
+## Технологии:
 
-* Configuration
+- `Ruby 2.7.2`
+- `Ruby on Rails 6.1.3`
+- `Webpacker 5.2.1`
+- Защита форм: `Google reCAPTCHA`
+- СУБД в продакшен-окружении: `Postgresql`
+- Локализация: `rails-I18n`
+- Приложение в учебных целях было [развернуто](https://thequestioned.herokuapp.com/) на Хероку
+(при переходе по ссылке необходимо немного подождать, чтобы приложение вышло из "спящего" 
+режима)
 
-* Database creation
+### Для локального запуска:
 
-* Database initialization
+1. Клонировать репозиторий:
 
-* How to run the test suite
+```
+$ git clone git@github.com:axmaxon/askme.git
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+2. Установить любым удобным способом `ruby 2.7.2`, если отсутствует.
+3. Установить необходимые гемы и зависимости:
 
-* Deployment instructions
+```
+$ bundle
+```
+4. В приложении используется reCAPTCHA для работы которой следует у Google получить ключи
+и указать их в `Rails credentials`
 
-* ...
+**recaptcha:**
+- public_key
+- private_key
+
+Для этого воспользоваться командой:
+
+```
+EDITOR='XXXX --wait' bin/rails credentials:edit
+```
+*где **XXXX** - удобный для вас редактор кода, например `vi` - для открытия
+в vim или `subl` для открытия в Sublime
+
+5. Применить миграции:
+
+```
+$ bundle exec rails db:migrate
+```
+
+6. Запустить сервер:
+
+```
+$ bundle exec rails db:migrate
+```
+
+7. В адресной строке веб-браузера указать:
+
+```
+http://localhost:3000/
+```
