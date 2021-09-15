@@ -18,13 +18,13 @@ module ApplicationHelper
       if hashtag.blank?
         link_to word, "#{Rails.root}/public/404.html"
       else
-        link_to word, hashtag_path(hashtag)
+        link_to word, hashtag_url(hashtag.name)
       end
     end.html_safe
   end
 
   # Рендерит имя хэштега в виде ссылки с якорем #
   def render_as_hashtags(hashtag)
-    link_to "##{hashtag.name}", hashtag_path(hashtag)
+    link_to "##{hashtag.name}", hashtag_url(hashtag.name)
   end
 end
